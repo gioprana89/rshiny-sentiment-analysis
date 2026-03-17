@@ -1,0 +1,230 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+list.files()
+```
+
+```{r}
+library(readxl)
+
+dataku <- read_xlsx("data_idx_gabung.xlsx")
+dataku <- as.data.frame(dataku)
+
+dataku
+
+```
+
+
+
+```{r}
+ambil_nama_jurnal_issn <- dataku[c("Journal", "ISSN", "Scopus")]
+
+ambil_nama_jurnal_issn
+
+```
+
+
+
+
+
+#Menyajikan Nama Jurnal, ISSN dan Scopus
+```{r}
+x <- unique(ambil_nama_jurnal_issn)
+x
+jumlah_artikel_jurnal_dalam_database <- length(x[,1])
+jumlah_artikel_jurnal_dalam_database
+```
+
+
+```{r}
+x <- unique(ambil_nama_jurnal_issn)
+
+x[complete.cases(x), ]
+ 
+
+
+```
+
+
+jumlah scopus
+
+jumlah jurnal sinta
+
+
+
+```{r}
+ ambil_nama_jurnal_issn <- dataku[c("Journal", "ISSN", "Indexed by Sinta", "Link Sinta")]
+    
+    x <- unique(ambil_nama_jurnal_issn)
+    
+    sinta_journal <- x[complete.cases(x), ]
+     sinta_journal
+    sinta_journal <- length(sinta_journal[,1])
+    
+   
+    sinta_journal
+
+
+```
+
+
+
+
+
+
+```{r}
+ambil_nama_jurnal_issn <- dataku[c("Journal", "ISSN", "Scopus", "Indexed by Sinta", "Link Sinta")]
+
+x <- unique(ambil_nama_jurnal_issn)
+
+x
+
+```
+
+```{r}
+
+
+```
+
+
+
+
+```{r}
+
+simpan_jumlah_artikel = 0
+jumlah_artikel <- length(x[,1])
+
+
+for(i in 1 : jumlah_artikel)
+{
+  
+  tes <- x[i,1]
+    indeks <- dataku[,"Journal"] %in% tes 
+    indeks_terpilih <- which(indeks == TRUE)
+
+  simpan_jumlah_artikel[i] <- length(indeks_terpilih)
+  
+  
+}
+
+simpan_jumlah_artikel
+sum(simpan_jumlah_artikel)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+library(stringi)
+library(stringr)
+
+X <- "Quality-Impact; 12452; sdfshsh"
+
+result <- sub(";.*", "", X)
+
+
+result
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Menghitung Jumlah Jurnal
+```{r}
+ambil_nama_jurnal_issn <- dataku[c("Journal", "ISSN", "Scopus")]
+x <- ambil_nama_jurnal_issn[,"Journal"]
+x <- as.factor(x)
+nama_jurnal <- levels(x)
+
+nama_jurnal
+
+length(nama_jurnal)
+
+```
+
+
+
+
+
+#Menghitung Jumlah Jurnal Terindeks Scopus
+```{r}
+ambil_nama_jurnal_issn <- dataku[c("Journal", "ISSN", "Scopus")]
+x <- ambil_nama_jurnal_issn[,"Scopus"]
+x <- as.factor(x)
+
+x
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

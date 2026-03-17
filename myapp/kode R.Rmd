@@ -1,0 +1,193 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+https://pranaugi.com/SHP/SHP_KECAMATAN_MEDAN
+
+```{r}
+library(sf)
+library(geojsonsf)
+
+url <- "https://pranaugi.com/SHP/SHP_KECAMATAN_MEDAN/geojson_medan.geojson"
+   
+data_geojson <- geojson_sf(url)
+
+
+
+
+print(data_geojson)
+
+
+```
+
+
+
+
+
+```{r}
+
+
+# convert ke shapefile
+data_shp <- st_write(data_geojson, "output/data_shp.shp")
+data_shp
+```
+
+
+
+
+
+
+
+
+```{r}
+library(sf)
+
+url <- "https://pranaugi.com/SHP/SHP_KECAMATAN_MEDAN/geojson_medan.geojson"
+
+data_geo <- st_read(url)
+
+data_geo
+
+```
+
+```{r}
+
+library(leaflet)
+
+library(leaflet.extras2)
+
+
+library(sf)
+
+url <- "https://pranaugi.com/SHP/SHP_KECAMATAN_MEDAN/geojson_medan.geojson"
+
+data_geo <- st_read(url)
+
+leaflet() %>%
+  addTiles() %>%
+  addPolygons(data = data_geo)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+
+library(leaflet)
+
+
+  leaflet(data_geojson) %>%
+      addTiles() %>%
+      setView(lng = 98.6669, lat = 3.4412, zoom = 11) %>%
+      addPolygons(
+        fillColor = "green",
+        color = "red",
+        weight = 1,
+        opacity = 1,
+        dashArray = 1,
+        fillOpacity = 1
+      )
+        
+      
+
+```
+
+
+
+
+```{r}
+library(leaflet)
+library(leaflet.extras2)
+library(sf)
+
+url <- "https://pranaugi.com/SHP/SHP_KECAMATAN_MEDAN/geojson_medan.geojson"
+
+data_geo <- st_read(url, quiet = TRUE)
+
+data_geo <- st_make_valid(data_geo)
+
+leaflet(data = data_geo) %>%
+  addTiles() %>%
+  addPolygons(
+    color = "blue",
+    weight = 1,
+    fillOpacity = 0.5
+  )
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+library(leaflet)
+library(leaflet.extras2)
+library(sf)
+
+url <- "https://raw.githubusercontent.com/gioprana89/geojson_medan/refs/heads/main/geojson_medan.geojson"
+
+data_geo <- st_read(url, quiet = TRUE)
+
+data_geo <- st_make_valid(data_geo)
+
+leaflet(data = data_geo) %>%
+  addTiles() %>%
+  addPolygons(
+    color = "blue",
+    weight = 1,
+    fillOpacity = 0.5
+  )
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+data_geo <- st_read("geojson_medan.geojson")
+
+data_geo
+
+```
+
+
+
+
